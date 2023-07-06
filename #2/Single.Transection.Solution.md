@@ -39,7 +39,7 @@ Run fallowing command **`npx hardhat compile`** to compile the contract.
 
 Then you can go to test file and use this code: 
 ```js
-// test/unstoppable/unstoppable.challenge.js
+// test/naive-receiver/naive-receiver.challenge.js
 
 it('Execution', async function () {
         /** CODE YOUR SOLUTION HERE */
