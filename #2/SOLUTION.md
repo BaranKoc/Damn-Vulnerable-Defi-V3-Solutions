@@ -106,7 +106,7 @@ And **`FlashLoanReceiver`** will pay transection fee until be out of money. 😥
 Here how you can do it
 
 ```js
-// test/unstoppable/unstoppable.challenge.js
+// test/naive-receiver/naive-receiver.challenge.js
 
 it('Execution', async function () {
         /** CODE YOUR SOLUTION HERE */

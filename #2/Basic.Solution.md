@@ -1,5 +1,5 @@
 ```js
-// test/unstoppable/unstoppable.challenge.js
+// test/naive-receiver/naive-receiver.challenge.js
 
 it('Execution', async function () {
         /** CODE YOUR SOLUTION HERE */
