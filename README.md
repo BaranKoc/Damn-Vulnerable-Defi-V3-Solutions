@@ -46,6 +46,6 @@ The purpose of this repository is finding the solutions of **[Damn Vulnerable De
 
 - ### Detailed solutions are below:
     
-    #### **#1 [Unstoppable](https://github.com/BaranKoc/Damn-Vulnerable-Defi-V3-Solutions/blob/main/%231/SOLUTION.md)**
+    #### **#1 [Unstoppable](https://github.com/BaranKoc/Damn-Vulnerable-Defi-V3-Solutions/blob/master/%231/SOLUTION.md)**
     #### **#2 [NaiveReceiver](https://github.com/BaranKoc/Damn-Vulnerable-Defi-V3-Solutions/blob/master/%232/SOLUTION.md)**
 
