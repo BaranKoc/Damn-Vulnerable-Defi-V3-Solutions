@@ -160,8 +160,7 @@ contract NaiveReceiver_SolutionCode
     }
 }
 ```
-
-Run fallowing command **`npx hardhat compile`** to compile the contract. 
+Your contracts will be compiled, when you run the test.
 
 <br/>
 

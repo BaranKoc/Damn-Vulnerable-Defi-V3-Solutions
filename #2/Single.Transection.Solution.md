@@ -33,11 +33,11 @@ contract NaiveReceiver_SolutionCode
         }
     }
 }
-```
-Run fallowing command **`npx hardhat compile`** to compile the contract. 
+``` 
+Your contracts will be compiled, when you run the test.
 
 
-Then you can go to test file and use this code: 
+Then you can go to test file And use this code:
 ```js
 // test/naive-receiver/naive-receiver.challenge.js
 

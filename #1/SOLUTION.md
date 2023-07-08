@@ -6,8 +6,8 @@ To pass the challenge, we will make the vault stop offering flash loans...
 <br/>
 
 ## What are the smart contracts 
-- **`UnstoppableVault.sol`**: smart contract that includes **`flashLoan()`** function 
-- **`ReceiverUnstoppable.sol`**: receiver smart contract that includes **`onFlashLoan()`** function 
+- **`UnstoppableVault.sol`**: smart contract that includes **`flashLoan(...)`** function 
+- **`ReceiverUnstoppable.sol`**: receiver smart contract that includes **`onFlashLoan(...)`** function 
 - **`DamnValuableToken.sol`**: just an ERC20 Token
 
 <br/>
@@ -15,7 +15,7 @@ To pass the challenge, we will make the vault stop offering flash loans...
 
 ## Solution 
 
-**1.** **`UnstoppableVault.sol`** contract's **`onFlashLoan()`** function
+**1.** **`UnstoppableVault.sol`** contract's **`onFlashLoan(...)`** function
 
 ``` solidity
 // ReceiverUnstoppable.sol
@@ -36,7 +36,7 @@ function onFlashLoan(
     }
 ```
 
-**2.** **`UnstoppableVault.sol`** contract's the **`flashloan()`** function
+**2.** **`UnstoppableVault.sol`** contract's the **`flashloan(...)`** function
 
 ``` solidity
 // UnstoppableVault.sol
@@ -71,7 +71,7 @@ function flashLoan(
     }
 ```
 
-**3.** The vulnarability cames from, **`UnstoppableVault.sol`** contract's the **`flashloan()`** function. 
+**3.** The vulnarability cames from, **`UnstoppableVault.sol`** contract's the **`flashloan(...)`** function. 
 
 ``` solidity
 // UnstoppableVault.sol
@@ -95,7 +95,7 @@ function flashLoan(
     }       
 ```
 
-If **`convertToShares(totalSupply)`** is not equal to **`balanceBefore` **transecton will fail with **`revert InvalidBalance()`**
+If **`convertToShares(totalSupply)`** is not equal to **`balanceBefore`** transecton will fail with **`revert InvalidBalance()`**
 
 <br/>
 
@@ -124,7 +124,10 @@ it('Execution', async function () {
 
 
 ## How could this exploit be prevented ?
-**Share your ideas with me :)**
+I think instead of using **`convertToShares(totalSupply) != balanceBefore`**,  
+
+**`convertToShares(totalSupply) >= balanceBefore`** should be used.
+
 
 
 <br/>
