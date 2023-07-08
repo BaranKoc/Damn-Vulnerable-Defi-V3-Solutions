@@ -126,7 +126,7 @@ it('Execution', async function () {
 ## How could this exploit be prevented ?
 I think instead of using **`convertToShares(totalSupply) != balanceBefore`**,  
 
-**`convertToShares(totalSupply) >= balanceBefore`** should be used.
+**`convertToShares(totalSupply) >= balanceBefore`** should be used inside **`UnstoppableVault.sol`** contract's **`onFlashLoan(...)`** function.
 
 
 
