@@ -85,9 +85,9 @@ function flashLoan(
     {
         //...
 
-        /////////////////////////////////////////////////////////
-        ///////////THIS IS WHERE THE PROBLEM CAMES FROM//////////
-        /////////////////////////////////////////////////////////
+        /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
+        /*            THIS IS WHERE THE PROBLEM CAMES FROM            */
+        /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/ 
         uint256 balanceBefore = totalAssets();        
         if (convertToShares(totalSupply) != balanceBefore) revert InvalidBalance();
 
