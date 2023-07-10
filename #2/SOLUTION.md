@@ -8,15 +8,15 @@ Take all ETH out of the user’s contract. If possible, in a single transaction.
 <br/>
 
 ## What are the smart contracts 
-- **`NaiveReceiverLenderPool.sol`**: smart contract that includes **`flashLoan()`** function
-- **`FlashLoanReceiver.sol`**: smart contract that includes **`onFlashLoan()`** function
+- **`NaiveReceiverLenderPool.sol`**: smart contract that includes **`flashLoan(...)`** function
+- **`FlashLoanReceiver.sol`**: smart contract that includes **`onFlashLoan(...)`** function
 
 <br/>
 
 
 ## Solution 
 
-**1.** **`NaiveReceiverLenderPool.sol`** contracts **`flashLoan()`** function
+**1.** **`NaiveReceiverLenderPool.sol`** contract's **`flashLoan(...)`** function
 ``` solidity
 // NaiveReceiverLenderPool.sol
 
@@ -50,7 +50,7 @@ function flashLoan(
     }
 ```
 
-**2.** **`FlashLoanReceiver.sol`** contracts **`onFlashLoan()`** function
+**2.** **`FlashLoanReceiver.sol`** contract's **`onFlashLoan(...)`** function
 
 ``` solidity
 // FlashLoanReceiver.sol
@@ -91,13 +91,13 @@ function onFlashLoan(
 
 **3.** The vulnarability cames from,  **`FlashLoanReceiver.sol`** contract.
 
-**`onFlashLoan()`** function is triggered from `NaiveReceiverLenderPool.sol` when **`flashLoan()`** is called.
+**`onFlashLoan(...)`** function is triggered from `NaiveReceiverLenderPool.sol` when **`flashLoan(...)`** is called.
 
 
 
-⚠️ But **`onFlashLoan()`** function doesn't check Who has called **`flashLoan()`** function.
+⚠️ But **`onFlashLoan(...)`** function doesn't check Who has called **`flashLoan(...)`** function.
 
-This means anybody who call **`flashLoan()`** function can pass  **`FlashLoanReceiver.sol`** contract as a `receiver` paremether to **`flashLoan()`** function. This will trigger **`onFlashLoan()`** function inside **`FlashLoanReceiver.sol`**.
+This means anybody who call **`flashLoan(...)`** function can pass  **`FlashLoanReceiver.sol`** contract as a `receiver` paremether to **`flashLoan(...)`** function. This will trigger **`onFlashLoan(...)`** function inside **`FlashLoanReceiver.sol`**.
 
 And **`FlashLoanReceiver`** will pay transection fee until be out of money. 😥😥😥
 
@@ -191,8 +191,31 @@ it('Execution', async function () {
 <br/>
 
 ## How could this exploit be prevented ?
-**Share your ideas with me :)**
+We want the **sender of the transection** to be equal to **users address**.
 
+first we have to create new variable inside **`FlashLoanReceiver.sol`** contract named **`owner`**
+
+``` solidity
+address private owner;
+
+// Modify the constructor
+constructor(address _pool, address _owner) {
+        pool = _pool;
+        owner = _owner;
+    }
+```
+Than inside **`FlashLoanReceiver.sol`** contract's **`onFlashLoan(...)`** function we will require **`tx.origin`** to be equal to **`owner`**.
+
+``` solidity
+function onFlashLoan(...) external returns (bytes32) {
+
+        require(tx.origin != owner, "Wrong sender");
+
+        /...
+        /...
+        /...
+    }
+```
 
 <br/>
 
