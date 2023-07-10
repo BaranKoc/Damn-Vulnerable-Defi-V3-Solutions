@@ -50,8 +50,8 @@ function flashLoan(
     }
 ```
 
-**2.** **`FlashLoanReceiver.sol`** contract's **`onFlashLoan(...)`** function
 
+**2.** **`FlashLoanReceiver.sol`** contract's **`onFlashLoan(...)`** function
 ``` solidity
 // FlashLoanReceiver.sol
 
