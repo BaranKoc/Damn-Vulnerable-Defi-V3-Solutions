@@ -1,6 +1,3 @@
-<a name="readme-top"></a>
-
-<br />
 <div align="center">
   <a href="https://damnvulnerabledefi.xyz">
     <img src="./cover.png" alt="Logo" width="600" height="80">
@@ -48,4 +45,7 @@ The purpose of this repository is finding the solutions of **[Damn Vulnerable De
     
     #### **#1 [Unstoppable](https://github.com/BaranKoc/Damn-Vulnerable-Defi-V3-Solutions/blob/master/%231/SOLUTION.md)**
     #### **#2 [NaiveReceiver](https://github.com/BaranKoc/Damn-Vulnerable-Defi-V3-Solutions/blob/master/%232/SOLUTION.md)**
+    #### **#3 [Truster](https://github.com/BaranKoc/Damn-Vulnerable-Defi-V3-Solutions/blob/master/%233/SOLUTION.md)**
+
+
 
