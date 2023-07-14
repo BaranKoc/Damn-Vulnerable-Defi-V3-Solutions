@@ -17,13 +17,13 @@ To pass the challenge, we will make the vault stop offering flash loans...
 
 Here **`ReceiverUnstoppable.sol`** contract's **`onFlashLoan(...)`** function
 
-([**ReceiverUnstoppable.sol**](contracts/ReceiverUnstoppable.md))
+([**ReceiverUnstoppable.sol**](contracts/ReceiverUnstoppable.md#L22))
 
 <br/>
 
 Here **`UnstoppableVault.sol`** contract's the **`flashloan(...)`** function
 
-([**UnstoppableVault.sol**](contracts/UnstoppableVault.md))
+([**UnstoppableVault.sol**](contracts/UnstoppableVault.md#L87C1-L87C1))
 
 <br/>
 
