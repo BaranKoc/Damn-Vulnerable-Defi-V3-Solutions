@@ -24,7 +24,7 @@ Here **`NaiveReceiverLenderPool.sol`** contract's **`flashLoan(...)`** function
 
 Here **`FlashLoanReceiver.sol`** contract's **`onFlashLoan(...)`** function
 
-([**FlashLoanReceiver**](#2/contracts/FlashLoanReceiver.sol#L24C1-L53C6))
+([**FlashLoanReceiver**](contracts/FlashLoanReceiver.sol#L24C1-L53C6))
 
 <br/>
 
