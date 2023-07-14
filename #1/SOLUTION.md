@@ -15,61 +15,16 @@ To pass the challenge, we will make the vault stop offering flash loans...
 
 ## Solution 
 
-**1.** **`UnstoppableVault.sol`** contract's **`onFlashLoan(...)`** function
+Here **`ReceiverUnstoppable.sol`** contract's **`onFlashLoan(...)`** function
 
-``` solidity
-// ReceiverUnstoppable.sol
+([**ReceiverUnstoppable.sol**](contracts/ReceiverUnstoppable.md))
 
-function onFlashLoan(
-        address initiator,
-        address token,
-        uint256 amount,
-        uint256 fee,
-        bytes calldata
-    ) external returns (bytes32) {
-        if (initiator != address(this) || msg.sender != address(pool) || token != address(pool.asset()) || fee != 0)
-            revert UnexpectedFlashLoan();
+<br/>
 
-        ERC20(token).approve(address(pool), amount);
+Here **`UnstoppableVault.sol`** contract's the **`flashloan(...)`** function
 
-        return keccak256("IERC3156FlashBorrower.onFlashLoan");
-    }
-```
+([**UnstoppableVault.sol**](contracts/UnstoppableVault.md))
 
-**2.** **`UnstoppableVault.sol`** contract's the **`flashloan(...)`** function
-
-``` solidity
-// UnstoppableVault.sol
-
-function flashLoan(
-        IERC3156FlashBorrower receiver,
-        address _token,
-        uint256 amount,
-        bytes calldata data
-    ) external returns (bool) 
-    {
-        if (amount == 0) revert InvalidAmount(0); // fail early
-        if (address(asset) != _token) revert UnsupportedCurrency(); // enforce ERC3156 requirement
-
-        uint256 balanceBefore = totalAssets();
-        if (convertToShares(totalSupply) != balanceBefore) revert InvalidBalance(); // enforce ERC4626 requirement
-        
-        uint256 fee = flashFee(_token, amount);
-
-        // transfer tokens out + execute callback on receiver
-        ERC20(_token).safeTransfer(address(receiver), amount);
-
-        // callback must return magic value, otherwise assume it failed
-        if (receiver.onFlashLoan(msg.sender, address(asset), amount, fee, data) != keccak256("IERC3156FlashBorrower.onFlashLoan"))
-            revert CallbackFailed();
-
-        // pull amount + fee from receiver, then pay the fee to the recipient
-        ERC20(_token).safeTransferFrom(address(receiver), address(this), amount + fee);
-        ERC20(_token).safeTransfer(feeRecipient, fee);
-        
-        return true;
-    }
-```
 <br/>
 
 The vulnarability cames from, **`UnstoppableVault.sol`** contract's the **`flashloan(...)`** function. 
