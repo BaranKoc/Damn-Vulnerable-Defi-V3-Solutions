@@ -16,78 +16,15 @@ Take all ETH out of the user’s contract. If possible, in a single transaction.
 
 ## Solution 
 
-**1.** **`NaiveReceiverLenderPool.sol`** contract's **`flashLoan(...)`** function
-``` solidity
-// NaiveReceiverLenderPool.sol
+Here **`NaiveReceiverLenderPool.sol`** contract's **`flashLoan(...)`** function
 
-function flashLoan(
-        IERC3156FlashBorrower receiver,
-        address token,
-        uint256 amount,
-        bytes calldata data
-    ) external returns (bool) {
-        if (token != ETH)
-            revert UnsupportedCurrency();
-        
-        uint256 balanceBefore = address(this).balance;
+([**NaiveReceiverLenderPool.sol**](contracts/NaiveReceiverLenderPool.sol))
 
-        // Transfer ETH and handle control to receiver
-        SafeTransferLib.safeTransferETH(address(receiver), amount);
-        if(receiver.onFlashLoan(
-            msg.sender,
-            ETH,
-            amount,
-            FIXED_FEE,
-            data
-        ) != CALLBACK_SUCCESS) {
-            revert CallbackFailed();
-        }
+<br/>
 
-        if (address(this).balance < balanceBefore + FIXED_FEE)
-            revert RepayFailed();
+Here **`FlashLoanReceiver.sol`** contract's **`onFlashLoan(...)`** function
 
-        return true;
-    }
-```
-
-
-**2.** **`FlashLoanReceiver.sol`** contract's **`onFlashLoan(...)`** function
-``` solidity
-// FlashLoanReceiver.sol
-
-function onFlashLoan(
-        address,
-        address token,
-        uint256 amount,
-        uint256 fee,
-        bytes calldata
-    ) external returns (bytes32) {
-        assembly { // gas savings
-            if iszero(eq(sload(pool.slot), caller())) {
-                mstore(0x00, 0x48f5c3ed)
-                revert(0x1c, 0x04)
-            }
-        }
-        
-        if (token != ETH)
-            revert UnsupportedCurrency();
-        
-        uint256 amountToBeRepaid;
-        unchecked {
-            amountToBeRepaid = amount + fee;
-        }
-
-        _executeActionDuringFlashLoan();
-
-        // Return funds to pool
-        SafeTransferLib.safeTransferETH(pool, amountToBeRepaid);
-
-        return keccak256("ERC3156FlashBorrower.onFlashLoan");
-    }
-
-    // Internal function where the funds received would be used
-    function _executeActionDuringFlashLoan() internal { }
-```
+([**FlashLoanReceiver**](#2/contracts/FlashLoanReceiver.sol))
 
 <br/>
 
@@ -117,7 +54,7 @@ But we have send 10 transection. If you want to do this challenge **in single tr
 ## How could this exploit be prevented ?
 We want the **sender of the transection** to be equal to **users address**.
 
-first we have to create new variable inside **`FlashLoanReceiver.sol`** contract named **`owner`**
+first we have to create **new variable** inside **`FlashLoanReceiver.sol`** contract named **`owner`**
 
 ``` solidity
 address private owner;
