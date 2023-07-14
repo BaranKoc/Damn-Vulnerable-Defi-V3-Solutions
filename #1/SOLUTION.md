@@ -41,9 +41,9 @@ function flashLoan(
     {
         //...
 
-        /////////////////////////////////////////////////////////
-        ///////////THIS IS WHERE THE PROBLEM CAMES FROM//////////
-        /////////////////////////////////////////////////////////
+        /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
+        /*            THIS IS WHERE THE PROBLEM CAMES FROM            */
+        /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/ 
         uint256 balanceBefore = totalAssets();        
         if (convertToShares(totalSupply) != balanceBefore) revert InvalidBalance();
 
@@ -73,7 +73,7 @@ So, we will send some amount of DVT tokens to **`UnstoppableVault.sol`** contrac
 ## How could this exploit be prevented ?
 I think instead of using **`convertToShares(totalSupply) != balanceBefore`**,  
 
-**`convertToShares(totalSupply) >= balanceBefore`** should be used.
+**`convertToShares(totalSupply) >= balanceBefore`** should be used inside **`UnstoppableVault.sol`** contract's **`onFlashLoan(...)`** function.
 
 
 
