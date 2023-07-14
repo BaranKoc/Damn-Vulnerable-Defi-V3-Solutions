@@ -18,13 +18,13 @@ Take all ETH out of the user’s contract. If possible, in a single transaction.
 
 Here **`NaiveReceiverLenderPool.sol`** contract's **`flashLoan(...)`** function
 
-([**NaiveReceiverLenderPool.sol**](contracts/NaiveReceiverLenderPool.sol))
+([**NaiveReceiverLenderPool.sol**](contracts/NaiveReceiverLenderPool.sol#L37C2-L64C6))
 
 <br/>
 
 Here **`FlashLoanReceiver.sol`** contract's **`onFlashLoan(...)`** function
 
-([**FlashLoanReceiver**](#2/contracts/FlashLoanReceiver.sol))
+([**FlashLoanReceiver**](#2/contracts/FlashLoanReceiver.sol#L24C1-L53C6))
 
 <br/>
 
